@@ -38,6 +38,12 @@ rl.on('line', async (data) => {
       case 'cat':
         await fsCommands.cat(commandArgs);
         break;
+      case 'add':
+        await fsCommands.add(commandArgs);
+        break;
+      case 'rn':
+        await fsCommands.rn(commandArgs);
+        break;
       default:
         console.log('Invalid input');
         break;
