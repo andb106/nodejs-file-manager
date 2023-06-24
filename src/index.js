@@ -2,6 +2,7 @@ import * as readline from 'node:readline/promises';
 import { homedir } from 'node:os'
 import * as navigation from './navigation/index.js';
 import { parseUserName, printCurrentDir, handleExit } from './utils/index.js';
+import * as fsCommands from './fs/index.js';
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -16,7 +17,7 @@ process.chdir(homedir());
 
 printCurrentDir();
 
-rl.on('line', (data) => {
+rl.on('line', async (data) => {
     const command = data.trim().split(' ')[0];
     const commandArgs = data.replace(command, '').trim();
 
@@ -33,6 +34,9 @@ rl.on('line', (data) => {
         break;
       case 'ls':
         navigation.ls();
+        break;
+      case 'cat':
+        await fsCommands.cat(commandArgs);
         break;
       default:
         console.log('Invalid input');
