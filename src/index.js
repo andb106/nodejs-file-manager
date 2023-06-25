@@ -5,6 +5,7 @@ import { parseUserName, printCurrentDir, handleExit } from './utils/index.js';
 import * as fsCommands from './fs/index.js';
 import { handleOsCommands } from './os/os.js';
 import { hash } from './hash/hash.js';
+import * as zip from './zip/index.js';
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -60,6 +61,12 @@ rl.on('line', async (data) => {
         break;
       case 'hash':
         await hash(commandArgs);
+        break;
+      case 'compress':
+        await zip.compress(commandArgs);
+        break;
+      case 'decompress':
+        await zip.decompress(commandArgs);
         break;
       default:
         console.log('Invalid input');
