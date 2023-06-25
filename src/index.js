@@ -3,6 +3,8 @@ import { homedir } from 'node:os'
 import * as navigation from './navigation/index.js';
 import { parseUserName, printCurrentDir, handleExit } from './utils/index.js';
 import * as fsCommands from './fs/index.js';
+import { handleOsCommands } from './os/os.js';
+import { hash } from './hash/hash.js';
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -52,6 +54,12 @@ rl.on('line', async (data) => {
         break;
       case 'rm':
         await fsCommands.rm(commandArgs);
+        break;
+      case 'os':
+        handleOsCommands(commandArgs);
+        break;
+      case 'hash':
+        await hash(commandArgs);
         break;
       default:
         console.log('Invalid input');
